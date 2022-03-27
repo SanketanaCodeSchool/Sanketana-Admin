@@ -6,11 +6,48 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import db from "C:/Users/User/Desktop/Sanketana-react-admin/src/firebase-config"
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  setDoc
+} from "firebase/firestore";
+import { useState, useEffect } from "react";
+
+
 
 const List = () => {
+
+  const [users, setUsers] = useState([]);
+
+  // reference to my students collection
+  const usersCollectionRef = collection(db, "students")
+
+
+  //useEffect hook is called when there is a change on  the o
+  useEffect ( () => 
+  {
+      const getUsers = async () => 
+      {
+          const data = await getDocs(usersCollectionRef);
+          setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+          //console.log(data.docs);
+      }
+      getUsers();
+  }, []   
+
+  );
+
+  
+    //console.log( users[0]) ;
+
   const rows = [
     {
-      id: "SANK_2901",
+      cust_id: "SANK_2901",
       student_name: "Jayant",
       parent_name: "Babita",
       email: "jayant@gmail.com",
@@ -20,7 +57,7 @@ const List = () => {
       status: "Approved",
     },
     {
-      id: "SANK_8924",
+      cust_id: "SANK_8924",
       student_name: "Aryan",
       parent_name: "Preeti",
       email: "aryan@gmail.com",
@@ -30,7 +67,7 @@ const List = () => {
       status: "Pending",
     },
     {
-      id: "SANK_9371",
+      cust_id: "SANK_9371",
       student_name: "student",
       parent_name: "Saranya",
       email: "saranya@gmail.com",
@@ -40,7 +77,7 @@ const List = () => {
       status: "Approved",
     },
     {
-      id: "SANK_1171",
+      cust_id: "SANK_1171",
       student_name: "Advik",
       parent_name: "Kishore",
       email: "advij@gmail.com",
@@ -50,7 +87,7 @@ const List = () => {
       status: "Approved",
     },
     {
-      id: "SANK_9182",
+      cust_id: "SANK_9182",
       student_name: "Rishabh",
       parent_name: "Ramya",
       email: "rishabh@gmail.com",
@@ -79,9 +116,9 @@ const List = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell className="tableCell">{row.id}</TableCell>
+          {users.map((row) => (
+            <TableRow key={row.cust_id}>
+              <TableCell className="tableCell">{row.cust_id}</TableCell>
               <TableCell className="tableCell">{row.student_name}</TableCell>
               <TableCell className="tableCell">{row.parent_name}</TableCell>           
               <TableCell className="tableCell">{row.email}</TableCell>
