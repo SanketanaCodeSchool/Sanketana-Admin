@@ -3,7 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
-import db from "C:/Users/User/Desktop/Sanketana-react-admin/src/firebase-config"
+import db from "../../firebase-config"
 import { addDoc, collection, getDocs } from "firebase/firestore";
 
 

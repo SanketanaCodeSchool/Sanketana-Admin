@@ -22,7 +22,7 @@ import { useState, useEffect } from "react";
 
 const List = () => {
 
-  
+
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
@@ -51,22 +51,25 @@ const List = () => {
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      console.log("loading");//return <div>Loading...</div>;
     } else {
-      console.log(items['documents']);
-      return (
-    
+        items.map(item => ( console.log({item})));
+            //<li key={item.id}>
+                 //</li>
+        
+
+      /*return (
         <ul>
           {items.map(item => (
             <li key={item.id}>
-              {item.name}
+              {item.name} {item.price}
             </li>
           ))}
-        </ul> 
-      );
+        </ul>
+      );*/
     }
   
-  /*
+
   const [users, setUsers] = useState([]);
 
   // reference to my students collection
@@ -180,7 +183,7 @@ const List = () => {
         </TableBody>
       </Table>
     </TableContainer>
-  );*/
+  );
 };
 
 export default List;
